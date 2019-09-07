@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#define BENCHMARK_COUNT 100
+#define BENCHMARK_COUNT 1000000
 
 
 // call this function to start a nanosecond-resolution timer
@@ -25,12 +25,12 @@ int main() {
 	void* dt = make_new_dynamic_table(10);
 	for(int i=1; i<=BENCHMARK_COUNT; ++i) {
         struct timespec vartime = timer_start();
-	if(i%2) {        
+	if( i % 10 >= 6 ) {        
 		push_back(&dt, random()%BENCHMARK_COUNT);
 	}
         else {
         
-          	pop_back(dt);
+          	pop_back(&dt);
         }
         long time_elapsed_nanos = timer_end(vartime);
         printf("%ld\n", time_elapsed_nanos);
