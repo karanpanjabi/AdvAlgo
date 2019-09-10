@@ -1,0 +1,44 @@
+Assignment 1:
+Topic: Study of Amortized complexity
+a) Dynamic table:
+Implement dynamic table.
+operations: push and pop.
+increase the size when the table reaches a particular size on push.
+decrease the size when the table reaches a particular size on pop.
+
+select:
+- ratio of increase and decrease(2 or 1.5 or 3 ...)
+- threshould for increasing
+- threshould for decreasing
+
+Try:
+i) with and without struct hacking
+
+output:
+- give the following statistics:
+  Experiment with varying selections:
+  for each insert and delete:
+  	max count of operation
+  	max time of operation
+  	total count and average for some n operations
+  	
+  	
+b) splay tree:
+Implement a splay tree:
+operations : add and search
+output:
+- give the following statistics:
+  Experiment with varying selections:
+  for each add and search:
+  	max count of operation
+  	max time of operation
+  	total count and average for some n operations
+  	
+submission date and time: on or before : ...
+how to submit : ... 	
+caution against plagiarism : All those sumitting the same copy will get zero.
+There could be further action against them in future assignments and project.
+
+
+   	
+  	
