@@ -36,5 +36,5 @@ int main() {
         printf("%ld\n", time_elapsed_nanos);
     }
 
-	printCopy(&dt);
+	// printCopy(&dt);
 }

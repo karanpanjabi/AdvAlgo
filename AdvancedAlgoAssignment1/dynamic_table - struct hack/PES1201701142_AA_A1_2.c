@@ -8,7 +8,7 @@
 #define decr_ratio 0.5
 
 #define load_factor_upper 1.0
-#define load_factor_lower 0.05
+#define load_factor_lower 0.25
 
 #define DEBUG 0
 

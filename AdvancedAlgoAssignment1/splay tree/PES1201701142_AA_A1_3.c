@@ -1,7 +1,7 @@
 #include "splay_tree_imp.h"
 #include <stdlib.h>
 #include <stdio.h>
-#define DEBUG 1
+#define DEBUG 0
 
 static int num_rotations = 0;
 
