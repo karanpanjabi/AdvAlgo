@@ -1,0 +1,30 @@
+2083
+-1 1143
+842
+-1 781
+861
+-1 858
+784
+-1 864
+808
+-1 891
+697
+3 906
+775
+-1 876
+743
+-1 812
+732
+1 863
+754
+-1 852
+Number of rotations: 28
+K: 16 V: 12	Left: 10, Right: 19
+K: 10 V: 2	Left: 7, Right: 13
+K: 7 V: 3	Left: 2, Right: -1
+K: 2 V: 1	Left: 0, Right: 6
+K: 0 V: 6	Left: -1, Right: -1
+K: 6 V: 3	Left: -1, Right: -1
+K: 13 V: 15	Left: 12, Right: -1
+K: 12 V: 6	Left: -1, Right: -1
+K: 19 V: 10	Left: -1, Right: -1

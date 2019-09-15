@@ -18,17 +18,17 @@ typedef struct
 {
     int num;
     int size;
-    int *arr;
+    int arr[0];
+
 } dyntable;
 
 // Initialize a dynamic table.
 void *make_new_dynamic_table(int capacity)
 {
 
-    dyntable *table = (dyntable *)malloc(sizeof(dyntable));
+    dyntable *table = (dyntable *)malloc(sizeof(dyntable) + sizeof(int) * capacity);
     table->num = 0;
     table->size = capacity;
-    table->arr = (int *)malloc(sizeof(int) * capacity);
 
     return (void *)table;
 }
@@ -39,28 +39,37 @@ void push_back(void **table_ptr, int key)
     dyntable *table = *table_ptr;
     if (table->size == 0)
     {
-        table->arr = (int *)malloc(sizeof(int));
-        table->size++;
+        dyntable *newtable = (dyntable *)malloc(sizeof(dyntable) + sizeof(int));
+        newtable->size = 1;
+        newtable->num = 0;
+
+        free(table);
+        *table_ptr = newtable;
+        table = newtable;
     }
     else if ((float)table->num / table->size >= load_factor_upper)
     {
         //allocate new block of memory by increasing the size
 
-        table->size = (int)(table->size * incr_ratio);
-        int *newarr = (int *)malloc(sizeof(int) * table->size);
+        int newsize = (int)(table->size * incr_ratio);
+        dyntable *newtable = (dyntable *)malloc(sizeof(dyntable) + sizeof(int) * newsize);
+
+        newtable->size = newsize;
+        newtable->num = table->num;
 
         for (int i = 0; i < table->num; i++)
         {
-            newarr[i] = table->arr[i];
+            newtable->arr[i] = table->arr[i];
         }
         copy++;
 
-        free(table->arr);
-
-        table->arr = newarr;
+        free(table);
+        *table_ptr = newtable;
+        table = newtable;
     }
 
     table->arr[table->num++] = key;
+
 
 #if DEBUG
     printf("Push ");
@@ -84,18 +93,22 @@ int pop_back(void **table_ptr)
     {
         //allocate a new block of memory and decrease size
 
-        table->size = (int)(table->size * decr_ratio);
-        int *newarr = (int *)malloc(sizeof(int) * table->size);
+        int newsize = (int)(table->size * decr_ratio);
+        dyntable *newtable = (dyntable *)malloc(sizeof(dyntable) + sizeof(int) * newsize);
+
+        newtable->size = newsize;
+        newtable->num = table->num;
 
         for (int i = 0; i < table->num; i++)
         {
-            newarr[i] = table->arr[i];
+            newtable->arr[i] = table->arr[i];
         }
         copy++;
 
-        free(table->arr);
+        free(table);
 
-        table->arr = newarr;
+        *table_ptr = newtable;
+        table = newtable;
     }
 
 #if DEBUG

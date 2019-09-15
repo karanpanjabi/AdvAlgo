@@ -3,6 +3,8 @@
 #include <stdio.h>
 #define DEBUG 1
 
+static int num_rotations = 0;
+
 typedef struct node
 {
     int key;
@@ -18,6 +20,7 @@ typedef struct tree
 //right rotates a tree rooted at root and returns new root
 node *right_rotate(node *root)
 {
+    num_rotations++;
     node *newroot = root->left;
     root->left = newroot->right;
     newroot->right = root;
@@ -27,6 +30,7 @@ node *right_rotate(node *root)
 //left rotates a tree rooted at root and returns new root
 node *left_rotate(node *root)
 {
+    num_rotations++;
     node *newroot = root->right;
     root->right = newroot->left;
     newroot->left = root;
@@ -205,6 +209,7 @@ void display(node *root)
     }
 }
 
+/* 
 node *newnode(int k, int v)
 {
     node *n = (node *)malloc(sizeof(node));
@@ -213,6 +218,7 @@ node *newnode(int k, int v)
     n->left = n->right = NULL;
     return n;
 }
+
 
 int main()
 {
@@ -233,5 +239,12 @@ int main()
 
 
 }
+*/
 
 #endif
+
+void disp_rotations(void *ptr)
+{
+    // display(((tree *)ptr)->root);
+    printf("Number of rotations: %d\n", num_rotations);
+}

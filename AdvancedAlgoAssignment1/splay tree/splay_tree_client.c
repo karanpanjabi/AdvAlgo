@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#define BENCHMARK_COUNT 100
+#define BENCHMARK_COUNT 1000
 
 
 // function to start a nanosecond-resolution timer
@@ -26,7 +26,7 @@ int main() {
     void* dictionary = make_new_dictionary();
     for(int i=1; i<=BENCHMARK_COUNT; ++i) {
         struct timespec vartime = timer_start();
-        if(i%2) {
+        if(i % 10 < 8) {
             insert(dictionary, random()%BENCHMARK_COUNT, random()%BENCHMARK_COUNT);
         }
         else {
@@ -36,4 +36,6 @@ int main() {
         long time_elapsed_nanos = timer_end(vartime);
         printf("%ld\n", time_elapsed_nanos);
     }
+
+    disp_rotations(dictionary);
 }
