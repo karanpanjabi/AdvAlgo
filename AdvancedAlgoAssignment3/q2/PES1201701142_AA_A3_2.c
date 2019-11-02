@@ -4,10 +4,11 @@
 
 #define DEBUG 0
 
+// processing the pattern
 int *compute_prefix_function(char *pattern, int patlen)
 {
     int m = patlen;
-    int *pi = (int *)malloc((m + 1) * sizeof(int));
+    int *pi = (int *)malloc((m + 1) * sizeof(int));     // computing the pi table
 
     pi[1] = 0;
     int k = 0;
@@ -40,13 +41,13 @@ void kmp_matcher(char *text, char *pattern)
     {
         while(q > 0 && pattern[q+1] != text[i])
         {
-            q = pi[q];
+            q = pi[q];      // while the pattern doesn't match the text, move forward by lookup from pi
         }
         if(pattern[q+1] == text[i])
         {
             q = q+1;
         }
-        if(q == m)
+        if(q == m)      // if m chars match, a match has been found, continue searching forward
         {
             found = 1;
             printf("%d ", i-m);
@@ -68,23 +69,12 @@ void kmp_matcher(char *text, char *pattern)
     
 }
 
-void to_lower(char *text)
-{
-    int n = strlen(text);
-    for (int i = 0; i < n; i++)
-    {
-        if (text[i] >= 'A' && text[i] <= 'Z')
-            text[i] += 32;
-    }
-}
-
 int main()
 {
     char text[4010];
     text[0] = '_';
     scanf("%[^\n]s", text + 1);
     getchar();
-    to_lower(text);
 
     #if DEBUG
     printf("Text: %s\n", text);
@@ -104,7 +94,6 @@ int main()
         pattern[0] = '_';
         scanf("%[^\n]s", pattern + 1);
         getchar();
-        to_lower(pattern);
 
         #if DEBUG
         printf("Pattern: %s\n", pattern);

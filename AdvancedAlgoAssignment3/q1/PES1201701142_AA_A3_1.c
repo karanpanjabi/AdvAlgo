@@ -5,12 +5,14 @@
 
 #define DEBUG 0
 
+#define CHARSIZE 256
+
 typedef struct node
 {
     int l;
     int r;                     // l and r only there to represent the substring of the text
     int leafnum;               // indicates the start of suffix if node ends with $
-    struct node *children[32]; // tells if child[i] starts with a-z or chars or $
+    struct node *children[CHARSIZE]; // tells if child[i] starts with a-z or chars or $
 } node;
 
 typedef struct stree
@@ -24,7 +26,7 @@ void init_node(node *p)
     p->l = -1;
     p->r = -1;
     p->leafnum = -2;
-    for (int i = 0; i < 32; i++)
+    for (int i = 0; i < CHARSIZE; i++)
     {
         p->children[i] = NULL;
     }
@@ -32,28 +34,7 @@ void init_node(node *p)
 
 int get_tidx(char c)
 {
-    if (c >= 'a' && c <= 'z')
-    {
-        return c - 'a';
-    }
-
-    switch (c)
-    {
-    case '.':
-        return 26;
-    case ' ':
-        return 27;
-    case ',':
-        return 28;
-    case '?':
-        return 29;
-    case '!':
-        return 30;
-    case '$':
-        return 31;
-    }
-
-    return -1;
+    return (int) c;
 }
 
 void to_lower(char *text, int n)
@@ -150,7 +131,7 @@ void disp_node(node *ptr, char *text, int textlen)
     }
     printf("\n");
 
-    for (int i = 0; i < 32; i++)
+    for (int i = 0; i < CHARSIZE; i++)
     {
         if (ptr->children[i] != NULL)
         {
@@ -176,7 +157,7 @@ void dfs_node_match(node *p, int rval)
     }
     else
     {
-        for (int i = 0; i < 32; i++)
+        for (int i = 0; i < CHARSIZE; i++)
         {
             if (p->children[i] != NULL)
             {
@@ -226,6 +207,9 @@ void find_all_matches(char *text, int textlen, char *pattern, int patlen, stree 
             return;
         }
     }
+
+    printf("-1\n");
+    return;
 }
 
 int main()
