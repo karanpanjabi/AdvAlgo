@@ -2,15 +2,15 @@
 #include <stdlib.h> 
 #include <time.h>
 
-#define debug 1
+#define debug 0
 
-typedef unsigned int LL;
+typedef long LL;
 
 static int k = sizeof(LL)*8 - 1;
 
 LL modexp(LL a, LL b, LL n)
 {
-    int c = 0;
+    LL c = 0;
     LL d = 1;
     for (int i = k; i >= 0; i--)
     {
@@ -23,7 +23,7 @@ LL modexp(LL a, LL b, LL n)
         }
         
         #if debug
-        printf("c:%d d:%d i: %d\n", c, d, i);
+        printf("c:%ld d:%ld i: %d bitset: %ld\n", c, d, i, b>>i & 1);
         #endif
     }
     return d;
@@ -46,7 +46,7 @@ int witness(LL a, LL n)
     // printf("t: %d u: %d\n", t, u);
     #endif 
 
-    LL *x = (int *) malloc((t+1)*sizeof(int));
+    LL *x = (LL *) malloc((t+1)*sizeof(LL));
     x[0] = modexp(a, u, n);
     for (int i = 1; i <= t; i++)
     {
@@ -100,13 +100,13 @@ int main()
     LL num;
     for (int i = 0; i < t; i++)
     {
-        scanf("%u", &num);
-        int j = num+1;
+        scanf("%ld", &num);
+        LL j = num+1;
         while (1)
         {
             if(miller_rabin(j, 50))
             {
-                printf("%d\n", j);
+                printf("%ld\n", j);
                 break;
             }
             j++;
@@ -134,8 +134,8 @@ int main()
     //         printf("%d\n", i);
     //     }
     // }
-    printf("isprime: %d\n", miller_rabin(100003, 10));
-    printf("%d\n", modexp(29205, 50001, 100003));
-    printf("%u\n", (LL) (78517*78517));
+    printf("isprime: %d\n", miller_rabin(10000000019, 10));
+    printf("%ld\n", modexp(29205, 50001, 100003));
+    printf("%ld\n", (LL) (78517L*78517L));
 }
 #endif
